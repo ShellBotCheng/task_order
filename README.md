@@ -60,25 +60,6 @@ vi ./config/setting.yml
 # 注意: settings.database 下对应的配置数据
 # 2. 确认log路径
 ```
-
-:::tip ⚠️注意 在windows环境如果没有安装中CGO，会出现这个问题；
-
-```bash
-E:\task-order>go build
-# github.com/mattn/go-sqlite3
-cgo: exec /missing-cc: exec: "/missing-cc": file does not exist
-```
-
-or
-
-```bash
-D:\Code\task-order>go build
-# github.com/mattn/go-sqlite3
-cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
-```
-
-[解决cgo问题进入](https://doc.task-order.dev/zh-CN/guide/faq#cgo-%E7%9A%84%E9%97%AE%E9%A2%98)
-
 :::
 
 #### 初始化数据库，以及服务启动
@@ -89,8 +70,14 @@ cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
 $ ./task-order migrate -c config/settings.dev.yml
 
 # 启动项目，也可以用IDE进行调试
+# 方法1
+# 开发时启动
+$ go run main.go server -c config/settings.dev.yml
+
 # macOS or linux 下使用
-$ ./task-order server -c config/settings.yml
+# 方法2
+# go build 后可执行
+$ ./task-order server -c config/settings.yml 
 
 ```
 
